@@ -1,0 +1,7 @@
+[lints]
+all=warn
+
+[options]
+module.file_ext=.js
+module.file_ext=.mp3
+suppress_comment= \\(.\\|\n\\)*\\$FlowFixMe

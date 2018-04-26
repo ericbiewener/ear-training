@@ -1,13 +1,9 @@
-import React, { Component } from 'react';
-import noteA from './sounds/A.mp3';
-import './App.css';
+// @flow
+import React from 'react';
+import {GuessInterval} from './interval/GuessInterval';
 
-class App extends Component {
-  render() {
-    return (
-      <audio src={noteA} />
-    );
-  }
+export function App() {
+  return (
+    <GuessInterval root="2G" />
+  );
 }
-
-export default App;
