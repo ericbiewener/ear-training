@@ -1,19 +1,28 @@
 // @flow
 import React, { Component, type Node } from 'react';
 import {noteMap, type NoteName} from '../notes';
+import {Icon, PlayButton} from './ui';
 
 type Props = {
   note: NoteName,
   children: Node,
 }
 
-export class Note extends Component<Props> {
+export class NoteButton extends Component<Props> {
   isPlaying = false
   sound: HTMLAudioElement
   
   constructor(props: Props) {
     super(props);
     this.initAudio(props.note)
+  }
+
+  componentDidMount() {
+    document.addEventListener('touchend', this.stop)
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('touchend', this.stop)
   }
   
   componentWillReceiveProps({note}: Props) {
@@ -50,13 +59,10 @@ export class Note extends Component<Props> {
   
   render() {
     return (
-      <button
-        onMouseDown={this.play}
-        onMouseUp={this.stop}
-        style={{ borderRadius: "50%", border: "1px solid black", padding: 20}}
-      >
-        {this.props.children}
-      </button>
+      <PlayButton onTouchStart={this.play}>
+        <div>{this.props.children}</div>
+        <Icon block>play_arrow</Icon>
+      </PlayButton>
     )
   }
 }

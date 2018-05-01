@@ -14,4 +14,9 @@ module.exports = {
     /.*\.test\..*/,
     /.*\/config\/.*/,
   ],
+  extraImports: {
+    'src/assets/styles/mixins': {
+      default: '* as mx',
+    }
+  }
 }

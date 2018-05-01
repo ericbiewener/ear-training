@@ -1,7 +1,9 @@
 // @flow
 import _ from 'lodash'
 import React, {Component} from 'react'
-import {Note} from '../components/Note'
+import styled from 'styled-components';
+import {NoteButton} from '../components/NoteButton'
+import {CorrectButton, WrongButton} from '../components/ui';
 import {notes, type NoteName} from '../notes';
 
 type Props = {
@@ -38,11 +40,17 @@ export class GuessInterval extends Component<Props, State> {
 
   render() {
     return (
-      <div>
-        <Note note={this.props.root}>Root</Note>
-        <Note note={this.state.interval}>?</Note>
-        <button onClick={this.markCorrect}>Correct</button>
-      </div>
+      <ButtonWrapper>
+        <NoteButton note={this.props.root}>Root</NoteButton>
+        <NoteButton note={this.state.interval}>?</NoteButton>
+        <CorrectButton onClick={this.markCorrect} />
+        <WrongButton onClick={this.markCorrect} />
+      </ButtonWrapper>
     );
   }
 }
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`

@@ -1,4 +1,4 @@
-'use strict';
+
 
 const autoprefixer = require('autoprefixer');
 const path = require('path');
@@ -84,7 +84,6 @@ module.exports = {
     // for React Native Web.
     extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx'],
     alias: {
-      
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
@@ -203,6 +202,7 @@ module.exports = {
               /\.html$/,
               /\.json$/,
               /\.mp3$/,
+              /\.svg$/,
             ],
             loader: require.resolve('file-loader'),
             options: {
@@ -214,7 +214,7 @@ module.exports = {
       // ** STOP ** Are you adding a new loader?
       // Make sure to add the new loader(s) before the "file" loader.
       {
-        test: /\.mp3$/,
+        test: /\.(mp3|svg|woff|woff2)$/,
         loader: 'file-loader',
         query: {
            name: 'static/media/[name].[hash:8].[ext]'

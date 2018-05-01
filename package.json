@@ -28,6 +28,7 @@
     "html-webpack-plugin": "2.29.0",
     "jest": "20.0.4",
     "lodash": "^4.17.10",
+    "material-design-icons": "^3.0.1",
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.8",
@@ -36,9 +37,11 @@
     "react": "^16.3.2",
     "react-dev-utils": "^5.0.1",
     "react-dom": "^16.3.2",
+    "react-ink": "^6.2.0",
     "resolve": "1.6.0",
     "style-loader": "0.19.0",
     "styled-components": "^3.2.6",
+    "styled-system": "^2.2.4",
     "sw-precache-webpack-plugin": "0.11.4",
     "url-loader": "0.6.2",
     "webpack": "3.8.1",
@@ -89,6 +92,11 @@
     "presets": [
       "react-app",
       "flow"
+    ],
+    "plugins": [
+      [
+        "babel-plugin-styled-components"
+      ]
     ]
   },
   "eslintConfig": {
@@ -96,6 +104,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-plugin-styled-components": "^1.5.1",
     "babel-preset-flow": "^6.23.0",
     "file-loader": "^1.1.11",
     "flow-bin": "^0.70.0"
