@@ -34,11 +34,21 @@ injectGlobal`
 
   body {
     margin: 0;
-    padding: 10px;
     font-family: sans-serif;
     font-size: 1rem;
     background: black;
     user-select: none;
+  }
+
+  body,
+  button {
+    color: white;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
   }
 
 `

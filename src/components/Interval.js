@@ -1,20 +1,21 @@
 // @flow
 import _ from 'lodash'
 import React, {Component} from 'react'
-import styled from 'styled-components';
+import {vr} from '../assets/styles/variables';
 import {NoteButton} from '../components/NoteButton'
-import {CorrectButton, WrongButton} from '../components/ui';
+import {BarButtonContainer, CorrectButton, WrongButton} from '../components/ui';
 import {notes, type NoteName} from '../notes';
 
 type Props = {
   root: NoteName,
+  isSinging: boolean,
 }
 
 type State = {
   interval: NoteName,
 }
 
-export class GuessInterval extends Component<Props, State> {
+export class Interval extends Component<Props, State> {
   octave: NoteName[]
   
   constructor(props: Props) {
@@ -39,18 +40,45 @@ export class GuessInterval extends Component<Props, State> {
   }
 
   render() {
+    const { root, isSinging} = this.props;
+    const {interval} = this.state
     return (
-      <ButtonWrapper>
-        <NoteButton note={this.props.root}>Root</NoteButton>
-        <NoteButton note={this.state.interval}>?</NoteButton>
+      <BarButtonContainer>
+        <NoteButton note={root} color={vr.lightBlue}>Root</NoteButton>
+        <NoteButton note={interval} color={vr.purple}>{isSinging ? interval : '?'}</NoteButton>
         <CorrectButton onClick={this.markCorrect} />
         <WrongButton onClick={this.markCorrect} />
-      </ButtonWrapper>
+      </BarButtonContainer>
     );
   }
 }
 
-const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-`
+const notes = [
+  'A',
+  'A#',
+  'B',
+  'C',
+  'C#',
+  'D',
+  'D#',
+  'E',
+  'F',
+  'F#',
+  'G',
+  'G#',
+]
+
+function getInterval(note1, note2) {
+  const low
+  const high
+  if (note1 < note2) {
+    low = note1
+    high = note2
+  }
+  else {
+    low = note2
+    high = note1
+  }
+
+  const lowOctave = low.
+}

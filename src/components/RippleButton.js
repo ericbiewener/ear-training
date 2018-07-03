@@ -24,36 +24,38 @@ const RippleItem = styled.div`
   animation: ${rippleAnimation} .7s linear;
 `;
 
-const RippleContainer = styled.div`
+const RippleContainer = styled.button`
   position: relative;
-  align-self: center;
   overflow: hidden;
 `
 
 type Props = {
   color: string,
   center?: boolean,
+  onTouchStart?: SyntheticTouchEvent<*> => void,
   children: Node,
 }
 
 type State = { ripples: RippleItem[] }
 
-class Ripple extends Component<Props, State> {
+class RippleButton extends Component<Props, State> {
   counter = 0
   rippleContainer: HTMLElement
   state = {
     ripples: []
   };
 
-  createRipple = (e: SyntheticMouseEvent<*>) => {
+  createRipple = (e: SyntheticTouchEvent<*>) => {
+    const { center, color, onTouchStart } = this.props;
     const { width, height, left, top } = this.rippleContainer.getBoundingClientRect();
+    const touch = e.touches[0]
 
     const size = Math.max(width, height);
 
-    const position = this.props.center
+    const position = center
       ? { x: 0, y: 0 }
-      : { x: e.clientX - left - (size / 2), y: e.clientY - top - (size / 2)}
-    
+      : { x: touch.clientX - left - (size / 2), y: touch.clientY - top - (size / 2)}
+
     // Material UI adds a rendered ripple to the array rather than rendering it in the main `render()` method,
     // so copy their approach
     this.setState(prevState => ({ ripples: [...prevState.ripples, (
@@ -61,10 +63,12 @@ class Ripple extends Component<Props, State> {
         position={position}
         size={size}
         key={this.counter++}
-        color={this.props.color}
+        color={color}
         onAnimationEnd={this.removeRipple}
       />
     )]}))
+
+    if (onTouchStart) onTouchStart(3)
   }
 
   removeRipple = () => this.setState(prevState => {
@@ -78,7 +82,7 @@ class Ripple extends Component<Props, State> {
       <RippleContainer
         {...props}
         innerRef={el => this.rippleContainer = el}
-        onMouseDown={this.createRipple}
+        onTouchStart={this.createRipple}
       >
         {children}
         {this.state.ripples}
@@ -87,4 +91,4 @@ class Ripple extends Component<Props, State> {
   }
 }
 
-export default Ripple
+export default RippleButton

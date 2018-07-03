@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import * as mx from '../assets/styles/mixins';
+import {transparentize} from 'polished';
 import {vr} from '../assets/styles/variables';
-import Ripple from './Ripple';
+import RippleButton from './RippleButton';
 
+// TODO: remove if not used, including material-icons package
 export const Icon = styled.i`
   font-family: 'Material Icons';
   font-weight: normal;
@@ -16,92 +17,31 @@ export const Icon = styled.i`
   word-wrap: normal;
   white-space: nowrap;
   direction: ltr;
-
   /* Support for all WebKit browsers. */
   -webkit-font-smoothing: antialiased;
   /* Support for Safari and Chrome. */
   text-rendering: optimizeLegibility;
-
   /* Support for Firefox. */
   -moz-osx-font-smoothing: grayscale;
-
   /* Support for IE. */
   font-feature-settings: 'liga';
 `
 
-export const Button = styled.button`
-  color: ${p => p.color};
-  background: none;
-  transition: transform 25ms;
-  padding: ${vr.spacing1};
-  align-self: center;
-
-  &:active {
-    transform: scale(0.95);
-  }
-`
-
-export const TextButton = styled(Button)`
-  position: relative;
-
-  &:after {
-    content: "";
-    height: 1px;
-    width: 0;
-    background: ${p => p.color};
-    display: block;
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-    transition: width 125ms;
-  }
-
-  &:active {
-    &:after {
-      width: 100%;
-    }
-  }
-`
-TextButton.defaultProps = {color: 'white'}
-
-const CircleButton = styled(Button)`
-  ${mx.circle('40px')}
-  padding: 0;
+export const BarButtonContainer = styled.div`
   display: flex;
-  position: relative;
-  overflow: hidden;
-
-  i {
-    margin: auto;
-  }
+  height: 100%;
 `
 
-const IconButton = ({ children, color, ...props }) => {
-  return (
-    <Ripple color={color} center>
-      <CircleButton color={color} {...props}>
-        <Icon>{children}</Icon>
-      </CircleButton>
-    </Ripple>
-  )
-}
-
-export const CorrectButton = p => (
-  <IconButton color={vr.green} {...p}>check</IconButton>
-)
-
-export const WrongButton = p => (
-  <IconButton color={vr.orange} {...p}>close</IconButton>
-)
-
-export const PlayButton = styled(Button)`
-  ${mx.circle('100px')}
-  border: 5px solid ${p => p.color};
-  border-radius: 50%;
-
-  &:active {
-    box-shadow: 0 0 30px ${p => p.color};
-  }
+export const BarButton = styled(RippleButton)`
+  flex: 1 1 0;
+  padding-bottom: ${vr.spacing2};
+  background: linear-gradient(to top, ${p => transparentize(.5, p.color)} 0%, black 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
 `
-PlayButton.defaultProps = {color: vr.lightBlue}
+
+export const CorrectButton = props => <BarButton color={vr.green} {...props} />
+export const WrongButton = props => <BarButton color={vr.red} {...props} />
+

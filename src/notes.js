@@ -46,3 +46,8 @@ export const noteMap: { [NoteName]: string } = {
 }
 
 export const notes: NoteName[] = Object.keys(noteMap).sort()
+
+export const chromaticScales = {
+  G: ['G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'Octave']
+}
+

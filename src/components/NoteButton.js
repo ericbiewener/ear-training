@@ -1,7 +1,7 @@
 // @flow
 import React, { Component, type Node } from 'react';
 import {noteMap, type NoteName} from '../notes';
-import {Icon, PlayButton} from './ui';
+import {BarButton} from './ui';
 
 type Props = {
   note: NoteName,
@@ -59,10 +59,11 @@ export class NoteButton extends Component<Props> {
   
   render() {
     return (
-      <PlayButton onTouchStart={this.play}>
-        <div>{this.props.children}</div>
-        <Icon block>play_arrow</Icon>
-      </PlayButton>
+      <BarButton
+        {...this.props}
+        onTouchStart={this.play}
+        onTouchEnd={this.stop}
+      />
     )
   }
 }
